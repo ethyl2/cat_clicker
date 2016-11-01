@@ -7,6 +7,15 @@ var cat_clicker = function() {
   var message = $("#message");
   var totalClicks = 0;
 
+  // Add names on top of each cat image.
+  // Cat names found on http://www.huffingtonpost.com/richard-kronick/-punny-and-funny-cat-name_b_8661176.html
+  var nameArray = ["Kitty Poppins", "Oprah Whisker", "Katy Purry", "Fleas Witherspoon"];
+  var catBoxes = $(".cat");
+
+  catBoxes.each(function(index) {
+    $( this ).prepend( "<h3>" + nameArray[index] + "</h3>" );
+    });
+
   $('#cat1').click(function(e) {;
     var currentCounter1 = counter1.html();
     currentCounter1++;
