@@ -150,7 +150,8 @@ var catArrayGenerator = function(catNum) {
 
 var model = {
   cats: catArrayGenerator(10),
-  chosenCat: null
+  chosenCat: null,
+  totalClicks: 0
 }
 
 // Code for controller AKA "octopus"
@@ -172,8 +173,14 @@ var controller = {
   },
   incrementCounter: function() {
     model.chosenCat.counter++;
+    model.totalClicks++;
     viewCat.showCat();
+    viewMessage.checkMessage();
+  },
+  getTotalClicks: function() {
+    return model.totalClicks;
   }
+
 }
 
 // Code for the 2 views: list and cat box
@@ -215,6 +222,28 @@ var viewCat = {
     this.catImageSource.attr("href", chosenCat.imageSource);
     this.catImageSource.text(chosenCat.imageSource);
     this.catCounter.text(chosenCat.counter);
+  }
+}
+
+var viewMessage = {
+  checkMessage: function() {
+    var message = $("#message");
+    var totalClicks = controller.getTotalClicks();
+    if (totalClicks < 10) {
+      message.html("<h2>And so the path begins to become a cat click-a-holic!</h2>");
+    }
+
+    else if (totalClicks < 25) {
+      message.html("<h2>Isn't it so satisfying to click on those cats?</h2>");
+    }
+
+    else if (totalClicks < 40) {
+      message.html("<h2>What would you rather be doing with your life right now?<br> Probably nothing more important than clicking on these cats.</h2>")
+    }
+
+    else if (totalClicks > 40) {
+      message.html("<h2>You win! You are on your way to become a cat click-a-holic!</h2>");
+    }
   }
 }
 
