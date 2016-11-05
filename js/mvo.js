@@ -1,5 +1,7 @@
 // Code for model:
 
+// Cat names found on
+//http://www.huffingtonpost.com/richard-kronick/-punny-and-funny-cat-name_b_8661176.html
 // Possible cat names:
 var nameChoices = ['Ali Cat',
 'Ali McClaw',
@@ -129,12 +131,9 @@ var imageSourceArray = [
   {catImage: "img/cat9.jpg",
   source: "https://commons.wikimedia.org/wiki/File:Balinese_blue_lynx_point.jpg"}];
 
-var model = {
-  init: function(catNum) {
+var catArrayGenerator = function(catNum) {
     var cats = [];
-    var num_cats = catNum;
-
-    for (var i = 0; i < num_cats; i++) {
+    for (var i = 0; i < catNum; i++) {
       // Choose a random index of the name choices array:
       var indexChoice = Math.floor(Math.random() * nameChoices.length);
       var cat = {
@@ -146,23 +145,76 @@ var model = {
       cats.push(cat);
       nameChoices.splice(indexChoice, 1);
     }
-    console.log(cats);
     return cats;
-  }
+  };
+
+var model = {
+  cats: catArrayGenerator(10),
+  chosenCat: null
 }
 
+// Code for controller AKA "octopus"
 var controller = {
   init: function() {
-    var catArray = model.init(10);
-    viewList.init(catArray);
+    viewList.init();
+    model.chosenCat = model.cats[0];
+    viewCat.init();
+  },
+  getChosenCat: function() {
+    return model.chosenCat;
+  },
+  getCats: function() {
+    return model.cats;
+  },
+  setChosenCat: function(cat) {
+    model.chosenCat = cat;
+    viewCat.showCat();
+  },
+  incrementCounter: function() {
+    model.chosenCat.counter++;
+    viewCat.showCat();
   }
 }
 
+// Code for the 2 views: list and cat box
 var viewList = {
-  init: function(catArray) {
-    for (var i = 0; i < catArray.length; i++) {
-      $("#cat-list ul").append("<li>" + catArray[i].name + "</li>");
+  init: function() {
+    var catList = $("#cat-list ul");
+    var catsArray = controller.getCats();
+    for (var i = 0; i < catsArray.length; i++) {
+      var cat = catsArray[i];
+      var catLi = $("<li></li>");
+      catLi.text(cat.name);
+      catList.append(catLi);
+      $(catLi).click(function(catCopy) {
+        return function() {
+          controller.setChosenCat(catCopy);
+          }
+      }(cat));
     }
+  }
+}
+
+var viewCat = {
+  init: function() {
+    this.showCat();
+    this.catImage = $("#cat-img");
+    this.catImage.click(function() {
+      controller.incrementCounter();
+    });
+  },
+
+  showCat: function() {
+    var chosenCat = controller.getChosenCat();
+    this.catName = $("#cat-name");
+    this.catImage = $("#cat-img");
+    this.catImageSource = $(".img-source a");
+    this.catCounter = $("#counter-num");
+    this.catName.text(chosenCat.name);
+    this.catImage.attr("src", chosenCat.image);
+    this.catImageSource.attr("href", chosenCat.imageSource);
+    this.catImageSource.text(chosenCat.imageSource);
+    this.catCounter.text(chosenCat.counter);
   }
 }
 

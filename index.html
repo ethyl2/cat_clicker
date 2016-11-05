@@ -3,20 +3,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cat Clicker Game</title>
-  <link href="css/styles.css" rel="stylesheet">
   <script src="js/jquery.min.js"></script>
+  <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-<header>
-  <h1>Cat Clicker Game</h1>
-  <h2>You may have clicked on cows. You may have even clicked on cookies in your past.<br>
-    Now, here are cats to click instead. See how many times you can click on a cat!<br>
-    Choose a cat from the list on the left.</h2>
-</header>
-<div id="cat-list"><ul></ul></div>
-<div id="cat-display" class="cat"><p>Click on a cat, and its photo will appear here.</p></div>
-<div id="message"></div>
+  <header>
+    <h1>Cat Clicker Game</h1>
+    <h2>You may have clicked on cows. You may have even clicked on cookies in your past.<br>
+      Now, here are cats to click instead. See how many times you can click on a cat!<br>
+      Choose a cat from the list on the left.</h2>
+  </header>
 
-<script src="js/scriptPremium.js"></script>
+  <div id="cat-list"><ul></ul></div>
+
+  <div id="cat-display" class="cat">
+    <h3 id="cat-name"></h3>
+    <img id="cat-img">
+    <p class="img-source"><a></a></p>
+    <h3 id="counter-num"></h3>
+  </div>
+
+  <div id="message"></div>
+
+  <script src="js/mvo.js"></script>
+
 </body>
 </html>
