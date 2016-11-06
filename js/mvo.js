@@ -309,7 +309,12 @@ var viewAdmin = {
         controller.saveChanges($('#name-input').val(), $('#img-input').val(), $('#clicks-input').val());
       });
       $('#cancel').click(function() {
-        controller.turnOffAdmin();
+        // Reset the values in the inputs to the originals:
+        $('#name-input').val(chosenCat.name);
+        $('#img-input').val(chosenCat.imageSource);
+        $('#clicks-input').val(chosenCat.counter);
+        // Alternatively, to hide the admin area instead, uncomment below:
+        //controller.turnOffAdmin();
       })
     }
 
