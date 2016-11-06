@@ -29,8 +29,10 @@ h3 {
   width: 20%;
   height: 400px;
   box-shadow: 0px 5px 0px 0px #5CA1DB;
-  margin: 0.5em auto;
+  margin: 0.75em 10em;
   background-color: #ACF950;
+  display: inline-block;
+
 }
 
 .cat p {
@@ -45,7 +47,6 @@ h3 {
 .cat:active {
   transform: translate(0px, 5px);
   -webkit-transform: translate(0px, 5px);
-  box-shadow: 0px 1px 0px 0px;
 }
 
 .cat img {
@@ -99,4 +100,49 @@ li:active {
   margin: 0.1em;
   padding: 0.1em;
   word-wrap: break-word;
+}
+
+.admin-button {
+  background-color: #50ACF9;
+  color: white;
+  padding: 0.75em;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0px 3px 0px 0px #5CA1DB;
+  margin: 0.75em;
+  border-radius: 5px;
+  float: right;
+  border: none;
+  outline: none;
+}
+
+.admin-button:hover {
+  background-color: #7CC1FB;
+  border-color: #7CC1FB;
+  border: none;
+  outline: none;
+}
+
+.admin-button:active {
+  transform: translate(0px, 3px);
+  -webkit-transform: translate(0px, 3px);
+  border: none;
+  outline: none;
+}
+
+#admin-section {
+  float:right;
+  width: 20%;
+  display: inline-block;
+  height: 200px;
+  color: grey;
+  background-color: white;
+  margin: 0.75em 2em;
+  border-radius: 5px;
+  padding: 1em;
+}
+
+#admin-section input {
+  padding: 0.5em;
+  margin: 0.5em;
 }

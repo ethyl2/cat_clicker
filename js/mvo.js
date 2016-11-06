@@ -151,7 +151,8 @@ var catArrayGenerator = function(catNum) {
 var model = {
   cats: catArrayGenerator(10),
   chosenCat: null,
-  totalClicks: 0
+  totalClicks: 0,
+  admin: true
 }
 
 // Code for controller AKA "octopus"
@@ -160,6 +161,8 @@ var controller = {
     viewList.init();
     model.chosenCat = model.cats[0];
     viewCat.init();
+    viewAdmin.init();
+    viewAdmin.displayAdmin();
   },
   getChosenCat: function() {
     return model.chosenCat;
@@ -179,11 +182,39 @@ var controller = {
   },
   getTotalClicks: function() {
     return model.totalClicks;
+  },
+  turnOnAdmin: function() {
+    model.admin = true;
+    viewAdmin.displayAdmin();
+  },
+  turnOffAdmin: function() {
+    model.admin = false;
+    viewAdmin.displayAdmin();
+  },
+  adminChecker: function() {
+    return model.admin;
+  },
+  saveChanges: function(newName, newImg, newClicks) {
+    model.chosenCat.name = newName;
+
+    // If image source changed, change the image displayed for the cat, as well
+    // as its link. Otherwise, just leave the image as the local one.
+    if (model.chosenCat.imageSource != newImg) {
+      model.chosenCat.image = newImg;
+    }
+    model.chosenCat.imageSource = newImg;
+    var clickDifference = newClicks - model.chosenCat.counter;
+    model.chosenCat.counter = newClicks;
+    model.totalClicks += clickDifference;
+    viewCat.showCat();
+  },
+  refreshAdmin: function() {
+    viewAdmin.displayAdmin();
   }
 
 }
 
-// Code for the 2 views: list and cat box
+// Code for the 4 views: list, cat box, message and admin
 var viewList = {
   init: function() {
     var catList = $("#cat-list ul");
@@ -196,6 +227,7 @@ var viewList = {
       $(catLi).click(function(catCopy) {
         return function() {
           controller.setChosenCat(catCopy);
+          controller.refreshAdmin();
           }
       }(cat));
     }
@@ -243,6 +275,47 @@ var viewMessage = {
 
     else if (totalClicks > 40) {
       message.html("<h2>You win! You are on your way to become a cat click-a-holic!</h2>");
+    }
+  }
+}
+
+var viewAdmin = {
+  init: function() {
+    $('#admin-button').click(function() {
+      console.log("in admin click handler function");
+      if (controller.adminChecker() == false) {
+        controller.turnOnAdmin();
+      }
+      else {
+        controller.turnOffAdmin();
+      }
+    })
+  },
+  displayAdmin: function() {
+
+    adminSection = $("#admin-section");
+    adminSection.empty();
+    if (controller.adminChecker() == true) {
+      var chosenCat = controller.getChosenCat();
+      adminSection.css('background-color', 'white');
+      adminSection = $("#admin-section");
+      var nameInput = "Name: <input id='name-input' type='text' value='" + chosenCat.name + "'></input>";
+      var imgInput = "ImgURL: <input id='img-input' type='url' value='" + chosenCat.imageSource + "'></input>";
+      var clicksInput = "#Clicks: <input id='clicks-input' type='number' value='" + chosenCat.counter + "'></input>";
+      var saveButton = "<button id='save' class='admin-button'>Save</button>";
+      var cancelButton = "<button id='cancel' class='admin-button'>Cancel</button>";
+      adminSection.append(nameInput, imgInput, clicksInput, saveButton, cancelButton);
+      $('#save').click(function() {
+        controller.saveChanges($('#name-input').val(), $('#img-input').val(), $('#clicks-input').val());
+      });
+      $('#cancel').click(function() {
+        controller.turnOffAdmin();
+      })
+    }
+
+    else {
+      adminSection.empty();
+      adminSection.css('background-color', '#F950AC');
     }
   }
 }
