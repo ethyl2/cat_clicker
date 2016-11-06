@@ -152,7 +152,7 @@ var model = {
   cats: catArrayGenerator(10),
   chosenCat: null,
   totalClicks: 0,
-  admin: true
+  admin: false
 }
 
 // Code for controller AKA "octopus"
