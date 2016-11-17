@@ -7,14 +7,14 @@
 </head>
 <body>
     <ul id="cat-list"></ul>
-    <div id="cat-display" class="cat">
+    <div id="cat-display" class="cat" data-bind="with: currentCat">
       <h3 data-bind="text: name" id="cat-name"></h3>
       <h4 data-bind="text: level"></h4>
-      <img data-bind="click: incrementCounter, attr: {src:imgSrc}" src="" alt="cute cat" id="cat-img">
+      <img data-bind="click: $parent.incrementCounter, attr: {src:imgSrc}" src="" alt="cute cat" id="cat-img">
       <h3 data-bind="text: clickCount" id="counter-num"></h3>
     </div>
 
-    <div id="nicknames">
+    <div id="nicknames" data-bind="with: currentCat">
       <h4>Nicknames</h4>
       <hr>
       <ul>
