@@ -1,8 +1,8 @@
-var Cat = function() {
+var Cat = function(data) {
   this.clickCount = ko.observable(0);
-  this.name = ko.observable("Elsa");
-  this.imgSrc = ko.observable("img/434164568_fea0ad4013_z.jpg");
-  this.imgAttribution = ko.observable("https://www.flickr.com/photos/bigtallguy/434164568");
+  this.name = ko.observable(data.name);
+  this.imgSrc = ko.observable(data.imgSrc);
+  this.imgAttribution = ko.observable(data.imgAttribution);
   this.level = ko.computed(function() {
     var level;
     var clicks = this.clickCount();
@@ -27,19 +27,27 @@ var Cat = function() {
     else if (clicks < 70) {
       return "adult";
     }
-    else {
+    else if (clicks < 80){
       return "senior";
     }
+    else {
+      return "ancient one";
+    }
     }, this);
-  this.nicknames = ko.observableArray(['Ali McClaw',
-  'Angelicat',
-  'Cat Benatar',
-  'Catalie Portman',]);
+  this.nicknames = ko.observableArray(data.nicknames);
 };
 
 var viewModel = function() {
   var self = this;
-  self.currentCat = ko.observable(new Cat());
+  self.currentCat = ko.observable(new Cat({
+    name: "Elsa",
+    imgSrc: "img/434164568_fea0ad4013_z.jpg",
+    imgAttribution: "https://www.flickr.com/photos/bigtallguy/434164568",
+    nicknames: ['Ali McClaw',
+    'Angelicat',
+    'Cat Benatar',
+    'Catalie Portman',]
+  }));
 
   self.incrementCounter = function() {
     self.currentCat().clickCount(self.currentCat().clickCount() + 1);
