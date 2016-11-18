@@ -6,11 +6,15 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <ul id="cat-list"></ul>
+    <ul id="cat-list" data-bind="foreach: catList">
+          <li><span data-bind="text: name, click: $parent.setCurrentCat"></span></li>
+    </ul>
+
     <div id="cat-display" class="cat" data-bind="with: currentCat">
       <h3 data-bind="text: name" id="cat-name"></h3>
       <h4 data-bind="text: level"></h4>
       <img data-bind="click: $parent.incrementCounter, attr: {src:imgSrc}" src="" alt="cute cat" id="cat-img">
+      <a class="img-source" data-bind="text: imgAttribution"></a>
       <h3 data-bind="text: clickCount" id="counter-num"></h3>
     </div>
 

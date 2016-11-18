@@ -163,8 +163,14 @@ var imageSourceArray = [
   source: "https://commons.wikimedia.org/wiki/File:Brown_Exotic_Shorthair_Kitten.jpg"},
   {catImage: "img/cat9.jpg",
   source: "https://commons.wikimedia.org/wiki/File:Balinese_blue_lynx_point.jpg"},
-  {catImage: "img/434164568_fea0ad4013_z.jpg",
-  source: "https://www.flickr.com/photos/bigtallguy/434164568"}];
+  {catImage: "img/cat10.jpg",
+  source: "https://www.flickr.com/photos/bigtallguy/434164568"},
+  {catImage: "img/cat11.jpg",
+  source: "https://www.flickr.com/photos/kpjas/22252709"},
+  {catImage: "img/cat12.jpg",
+  source: "https://www.flickr.com/photos/malfet/1413379559/in/gallery-118577234@N05-72157644656467921/"},
+  {catImage: "img/cat13.jpg",
+  source: "https://www.flickr.com/photos/xshamx/4154543904/in/gallery-calm_waters-72157624158222712/"}];
 
 var catArrayGenerator = function(catNum) {
     var cats = [];
@@ -189,9 +195,7 @@ var catArrayGenerator = function(catNum) {
     return cats;
   };
 
-var initialCats = catArrayGenerator(10);
-console.log(initialCats[0]);
-
+var initialCats = catArrayGenerator(imageSourceArray.length);
 
 var Cat = function(data) {
   this.clickCount = ko.observable(0);
@@ -243,10 +247,12 @@ var viewModel = function() {
 
   self.currentCat = ko.observable(this.catList()[0]);
 
-
   self.incrementCounter = function() {
     self.currentCat().clickCount(self.currentCat().clickCount() + 1);
+  }
 
+  self.setCurrentCat = function(cat) {
+    self.currentCat(cat);
   }
 }
 
