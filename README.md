@@ -1,6 +1,6 @@
 # Cat Clicker
 
-Three versions of clicking cats:
+Four versions of clicking cats:
 
 - Original: https://ethyl2.github.io/cat_clicker/indexOriginal.html
 
@@ -8,11 +8,13 @@ Three versions of clicking cats:
 
 - "Organized": https://ethyl2.github.io/cat_clicker
 
+- "With Knockout": https://ethyl2.github.io/cat_clicker/cat_clicker_with_knockout/
+
 -------------------------------
 
 This is a Udacity project designed to give students practice in modifying a
 web project as the given specifications from a client change. Also, the code is
-finally organized into model, controller, and view sections of code.
+later organized into model, controller, and view sections of code.
 
 The first specifications included a cat image with a counter.
 
@@ -24,6 +26,8 @@ the corresponding name, image, and counter is displayed.
 The "organized" version has its JavaScript code organized into model, controller,
 and view objects. The model and view objects never interact directly with each other.
 Rather, the controller acts as the go-between.
+
+The last version uses Knockout to handle the separation of concerns.
 
 ### Other elements I added:
 
