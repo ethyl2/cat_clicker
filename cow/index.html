@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cow Clicker</title>
+    <!-- The following css will align the image and counter horizontally -->
+    <style>
+      body {
+        margin: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <img id="cow" src="https://upload.wikimedia.org/wikipedia/commons/2/21/Cow_cartoon_04.svg"
+      alt="cow cartoon" onclick="incrementCounter()">
+    <h2 id="counter">0</h2>
+
+    <script>
+      var counter = document.getElementById("counter");
+      // The function below gets the current value of the counter, increments it, and
+      // updates the counter display.
+      function incrementCounter() {
+        var counterNum = counter.textContent;
+        counterNum++;
+        counter.textContent = counterNum;
+      }
+    </script>
+  </body>
+</html>
